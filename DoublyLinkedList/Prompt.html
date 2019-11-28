@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Prompt</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="-doubly-linked-list-"><center> Doubly Linked List </center></h1>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Practice creating templated code</li>
+<li>Practice creating iterators</li>
+<li>Use Google Test</li>
+</ul>
+<h2 id="matthews-stats">Matthew’s Stats</h2>
+<ul>
+<li>Time taken: 2 hours</li>
+<li>Files: 13</li>
+<li>Lines of Code: 987</li>
+</ul>
+<h2 id="restrictions-and-requirements">Restrictions and Requirements</h2>
+<ul>
+<li>No global variables may be used</li>
+<li>You may <strong>NOT</strong> change the signatures of any of the provided methods
+<ul>
+<li>You may add additional members and methods if you wish</li>
+</ul></li>
+<li>You may <strong>NOT</strong> remove any methods
+<ul>
+<li>Again, adding members and methods is completely fine</li>
+</ul></li>
+<li>You may <strong>NOT</strong> use any stl containers such as but not limited to std::deque or std::vector in your solution. Doing so <strong>will be considered cheating</strong> and you will be sent to SJA for it.</li>
+</ul>
+<h2 id="problem-description">Problem Description</h2>
+<p>Implement a <strong>templated</strong> library for a doubly-linked list class. A doubly linked list is made up of Nodes. Each node contains a value and a pointer to the next element in the sequence as well as to the previous element. You can think of it like the barrel of monkeys below.</p>
+<p><img src="https://i.pinimg.com/originals/a6/85/7c/a6857c4b21553f96a13ea6bce783420e.jpg" alt="barrel of monkeys" /></p>
+<p>Each monkey is a Node with its body the value and its arms the pointers to the next and previous Node.</p>
+<p>The way that the Doubly Linked List keeps track of its nodes is through two pointers: head and tail. Head points to the first element in the list and tail points to the last element in the list so you end up with something that looks like <img src="https://miro.medium.com/max/750/1*92uL4rbcoVNErS72qzFw-g.png" alt="A doubly linked list" /></p>
+<p>Your doubly linked list will be <strong>templated</strong> over the type of element it stores in the Node.</p>
+<p>While doubly-linked lists may appear similar to vectors the way that they are stored in memory causes them to have very different performance characteristics.</p>
+<ul>
+<li>Insertion and deletion of elements at both the front and end of a doubly-linked list are very quick while only insertions and deletions at the end of vectors are efficient.</li>
+<li>To access an element in a doubly-linked list you must go through all of the elements that come before it but with a vector the amount of time it takes to access an element is constant</li>
+</ul>
+<p>So if you do a lot of removals and insertions a doubly-linked list is probably better but if you do a lot of random element accesses a vector would be superior.</p>
+<h2 id="the-classes">The Classes</h2>
+<h3 id="doubly-linked-list">Doubly Linked List</h3>
+<ul>
+<li>The doubly linked list class.</li>
+<li>You will need to add the members mentioned in the problem description</li>
+<li>Templated over the type of element it stores</li>
+</ul>
+<h3 id="doubly-linked-node">Doubly Linked Node</h3>
+<ul>
+<li>A Node in the Doubly Linked List Class</li>
+<li>I haven't given you anything here so what you do is up to you but make sure it has at least the members discussed in the problem description</li>
+<li>Templated over the type of value that it stores</li>
+</ul>
+<h3 id="iterators">Iterators</h3>
+<ul>
+<li>All of the iterators you are creating are <a href="http://www.cplusplus.com/reference/iterator/BidirectionalIterator/">bidirectional iterators</a>.</li>
+<li>Implementing them will be a little different from what we've covered in class because our container is not indexed based and does not possess an at method. Don't worry though, the implementation is not hard.</li>
+</ul>
+<h4 id="foward-iterators">Foward iterators</h4>
+<ul>
+<li>Doubly Linked List Iterator</li>
+<li>Const Doubly Linked List Iterator</li>
+<li>These iterators move from the start of the list to the end of the list</li>
+</ul>
+<h4 id="reverse-iterators">Reverse iterators</h4>
+<ul>
+<li>Reverse Doubly Linked List Iterator</li>
+<li>Const Reverse Doubly Linked List Iterator</li>
+<li>These iterators move from the end of the list to the start of the list</li>
+<li>These iterators behave similarily to <a href="http://www.cplusplus.com/reference/vector/vector/rbegin/">std::vector's reverse iterators</a> and I recommend you take a look over the example if you haven't done anything with reverse iterators before.</li>
+</ul>
+<h3 id="exceptions">Exceptions</h3>
+<ul>
+<li>The string returned by the what method can contain anything you want it to but make it relevant to the problem that is happening.</li>
+</ul>
+<h4 id="doubly-linked-list-error">Doubly Linked List Error</h4>
+<ul>
+<li>A generic exception for representing an error that has occurred when working with a Doubly Linked List</li>
+<li>Inherits from: std::exception</li>
+<li>Thrown by: None</li>
+</ul>
+<h4 id="doubly-linked-list-empty-error">Doubly Linked List Empty Error</h4>
+<ul>
+<li>An exception representing that the operation could not be done because the list is empty</li>
+<li>Inherits from: DoublyLinkedLIstError</li>
+<li>Thrown by: DoublyLinkedList::front and DoublyLinkedList::back</li>
+</ul>
+<h4 id="doubly-linked-list-out-of-bounds-error">Doubly Linked List Out Of Bounds Error</h4>
+<ul>
+<li>An exception representing that the operation could not be done because the iterator is out of bounds</li>
+<li>Inherits from: DoublyLinkedLIstError</li>
+<li>Thrown by: operator* in the iterators</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<p>We will once again be using Google Test to test your program.</p>
+<h2 id="what-to-submit">What to Submit</h2>
+<p>A zip file containing the <strong>src</strong> directory. Yes, you really are zipping the folder this time.</p>
+<h2 id="hints">Hints</h2>
+<ul>
+<li>Since you are writing templated code CLion might not be as helpful in suggesting autocompletes or might not be able to at all</li>
+<li>When you write templated code don't forget that the function definitions must also appear in the header file</li>
+<li>Since you are writing templated code, if you make an error the compiler will spit out a huge amount of errors. When trying to fix the errors start wit the first error and don't go past that. Fix that error then recompile and then go again. Keep doing this until all of the errors are fixed.</li>
+<li>Be careful when doing things with the empty list, lists that only have a single item, operations that reduce the list to a single element, and operations that make the list empty
+<ul>
+<li>You will have to make sure to update head and tail correctly in these cases</li>
+</ul></li>
+<li>The test cases rely heavily on your iterators so make sure that they are correct.</li>
+</ul>
+</body>
+</html>
